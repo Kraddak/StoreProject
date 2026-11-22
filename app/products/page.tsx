@@ -1,13 +1,12 @@
 import React from 'react'
 import ProductsContainer from '@/components/products/ProductsContainer'
 
-const ProductsPage = ({
-  searchParams,
-}: {
-  searchParams: { layout?: string; search?: string }
+const ProductsPage = async ({ searchParams }: {
+  searchParams: Promise<{ layout?: string; search?: string }>
 }) => {
-  const layout = searchParams.layout || 'grid'
-  const search = searchParams.search || ''
+  const { layout: layoutParam, search: searchParam } = await searchParams
+  const layout = layoutParam || 'grid'
+  const search = searchParam || ''
   return <ProductsContainer layout={layout} search={search}></ProductsContainer>
 }
 
